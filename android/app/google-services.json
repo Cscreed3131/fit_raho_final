@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1046599122878",
+    "project_id": "fit-raho-final",
+    "storage_bucket": "fit-raho-final.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046599122878:android:d2d5448c06ac64a61003ef",
+        "android_client_info": {
+          "package_name": "com.example.fit_raho"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGF6QcOwogq1enb4OJbQfeilqKHVyUQRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
