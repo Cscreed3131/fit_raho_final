@@ -1,20 +1,19 @@
 // core
-import 'package:fit_raho/provider/user_data_provider.dart';
+import 'package:fit_raho/src/auth/providers/signin_provider.dart';
+import 'package:fit_raho/src/auth/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 // firebase
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'client_signup_screen.dart';
-
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
   static const routeName = '/login';
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _form = GlobalKey<FormState>();
 
   final _enteredEmailController = TextEditingController();
@@ -36,15 +35,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final signin = ref.watch(signinProvider.notifier);
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     final shortestSide = MediaQuery.of(context).size.shortestSide < 600;
     final font20 = screenHeight * 0.07;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Consumer(
         builder: (context, ref, child) {
-          final userState = ref.watch(usersProvider.notifier);
           return SizedBox(
             height: double.infinity,
             width: double.infinity,
@@ -169,11 +169,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 ),
                                               ),
                                               onPressed: () async {
-                                                userState.signIn(
-                                                  _enteredEmailController.text,
-                                                  _enteredpasswordContoller
-                                                      .text,
-                                                );
+                                                signin.signIn(
+                                                    _enteredEmailController
+                                                        .text,
+                                                    _enteredpasswordContoller
+                                                        .text);
                                               },
                                               child: Text(
                                                 'Sign in',
@@ -201,52 +201,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 if (!signInRequired)
                                   TextButton(
                                     onPressed: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: const Text('Register as'),
-                                            content: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    // Handle Member option
-                                                    Navigator.of(context)
-                                                        .popAndPushNamed(
-                                                      ClientSignUpScreen
-                                                          .routeName,
-                                                    );
-                                                  },
-                                                  child: const Text('Member'),
-                                                ),
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    // Handle Trainer option
-                                                    // Navigator.of(context)
-                                                    //     .popAndPushNamed(
-                                                    //   // TrainerSignUpScreen
-                                                    //       // .routeName,
-                                                    // );
-                                                  },
-                                                  child: const Text('Trainer'),
-                                                ),
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    // Handle Trainer option
-                                                    // Navigator.of(context)
-                                                    //     .popAndPushNamed(
-                                                    //   OwnerSignUpScreen
-                                                    //       .routeName,
-                                                    // );
-                                                  },
-                                                  child: const Text('Owner'),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      );
+                                      Navigator.of(context)
+                                          .pushNamed(SignUpScreen.routeName);
                                     },
                                     child: const Text(
                                       'Create account',

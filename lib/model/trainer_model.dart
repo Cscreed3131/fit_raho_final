@@ -4,17 +4,19 @@ class Trainer {
   String id;
   String userId;
   String specialization;
-  String gymId;
-  List<String> clients;
-  List<String> certifications;
-  int yearsOfExperience;
-  Map<String, List<String>> availability;
-  List<Map<String, dynamic>> ratings;
+  String profilePictureUrl;
+  String gymId; // gym id assigned with trainer
+  List<String> clients; // list of client of the trainer
+  List<String> certifications; // List of certification of the trainer
+  int yearsOfExperience; // years of experience
+  Map<String, List<String>> availability; // days when the trainer is available
+  List<Map<String, dynamic>> ratings; // list of client rating
 
   Trainer({
     required this.id,
     required this.userId,
     required this.specialization,
+    required this.profilePictureUrl,
     required this.gymId,
     required this.clients,
     required this.certifications,
@@ -29,6 +31,7 @@ class Trainer {
       'id': id,
       'userId': userId,
       'specialization': specialization,
+      'profileImageUrl': profilePictureUrl,
       'gymId': gymId,
       'clients': clients,
       'certifications': certifications,
@@ -44,6 +47,7 @@ class Trainer {
       id: map['id'] as String,
       userId: map['userId'] as String,
       specialization: map['specialization'] as String,
+      profilePictureUrl: map['profilePictureUrl'] as String,
       gymId: map['gymId'] as String,
       clients: List<String>.from(map['clients']),
       certifications: List<String>.from(map['certifications']),

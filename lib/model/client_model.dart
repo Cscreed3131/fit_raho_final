@@ -3,9 +3,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Client {
-  String id;
-  String userId;
-  String gymId;
+  String id; // doc id
+  String userId; // user id
+  String gymId; // client assigned with gym id
   String subscriptionPlanId;
   Timestamp subscriptionStartDate;
   Timestamp subscriptionEndDate;

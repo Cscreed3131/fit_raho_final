@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fit_raho/firebase_options.dart';
-import 'package:fit_raho/src/auth/screens/client_signup_screen.dart';
-import 'package:fit_raho/src/owner/screens/member_list_screen.dart';
-import 'package:fit_raho/src/owner/screens/trainer_list_screen.dart';
+import 'package:fit_raho/loading_splash_screen.dart';
+import 'package:fit_raho/src/auth/screens/signin_screen.dart';
+import 'package:fit_raho/src/auth/screens/signup_screen.dart';
+import 'package:fit_raho/src/gym/screens/gym_dashboard.dart';
+import 'package:fit_raho/src/home/widgets/home_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -42,22 +45,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Fit Raho',
-
       theme: ThemeData(
         pageTransitionsTheme: const PageTransitionsTheme(builders: {
           TargetPlatform.android: CupertinoPageTransitionsBuilder(),
           TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
         }),
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green,
+          seedColor: Colors.red,
           background: const Color(0xFFF9FEFF),
-          primary: const Color(0xFF276221),
-          secondary: const Color(0xFF3B8132),
-          tertiary: const Color(0xFFF1F9EC),
-          primaryContainer: const Color(0xFFACD8A7),
-          onPrimary: const Color(0xFF1DB233),
-          outline: const Color(0xFF3B8132),
-          outlineVariant: const Color(0xFF46923C),
+          primary: const Color(0xFFD32F2F), // Red primary color
+          secondary: const Color(0xFFEF5350), // Red secondary color
+          tertiary: const Color(0xFFFDF2F2), // Light red tertiary color
+          primaryContainer: const Color(0xFFE57373), // Light red for containers
+          onPrimary: const Color(0xFFB71C1C), // Dark red for text on primary
+          outline: const Color(0xFFEF5350), // Red outline
+          outlineVariant:
+              const Color(0xFFC62828), // Darker red variant for outline
         ),
         cardTheme: CardTheme(
           elevation: 2,
@@ -72,26 +75,23 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const LoadingSplashScreen();
+          }
+          if (snapshot.hasData) {
+            return const HomeScreen();
+          }
+          return const LoginScreen();
+        },
+      ),
       routes: {
-        ClientSignUpScreen.routeName: (context) => const ClientSignUpScreen(),
-        // TrainerSignUpScreen.routeName: (context) => const TrainerSignUpScreen(),
-        // OwnerSignUpScreen.routeName: (context) => const OwnerSignUpScreen(),
-        MemberListScreen.routeName: (context) => const MemberListScreen(),
-        TrainerListScreen.routeName: (context) => const TrainerListScreen(),
+        LoginScreen.routeName: (context) => const LoginScreen(),
+        SignUpScreen.routeName: (context) => const SignUpScreen(),
+        HomeScreen.routeName: (context) => const HomeScreen(),
       },
-      // home: StreamBuilder(
-      //   stream: FirebaseAuth.instance.authStateChanges(),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.hasData) {
-      //       // Get the user data
-      //       return const OwnerHomeScreen();
-      //     }
-      //     return const LoginScreen();
-      //   },
-      // ),
-      home: const ClientSignUpScreen(),
-      //OwnerHomePage(), //for drawer test by bikash
-      //home: SignUpPage(isGymOwner: true), //changes by akash
     );
   }
 }

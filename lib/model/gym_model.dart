@@ -3,19 +3,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Gym {
   String id;
   String name;
+  String email;
+  String contactNumber;
   String address;
   String ownerId;
   Timestamp createdAt;
-  List<String> trainers;
-  List<String> clients;
-  List<String> subscriptionPlans;
-  List<String> classSchedule;
-  Map<String, String> openingHours;
-  List<String> facilities;
+  List<String> trainers; // leave this null when creating a new gym
+  List<String> clients; // leave this null when creating a new gym
+  List<String> subscriptionPlans; // leave this null when creating a new gym
+  List<String> classSchedule; // leave this null when creating a new gym
+  Map<String, String> openingHours; // leave this null when creating a new gym
+  List<String> facilities; // leave this null when creating a new gym
 
   Gym({
     required this.id,
     required this.name,
+    required this.email,
+    required this.contactNumber,
     required this.address,
     required this.ownerId,
     required this.createdAt,
@@ -32,6 +36,8 @@ class Gym {
     return {
       'id': id,
       'name': name,
+      'email': email,
+      'contactNumber': contactNumber,
       'address': address,
       'ownerId': ownerId,
       'createdAt': createdAt,
@@ -49,6 +55,8 @@ class Gym {
     return Gym(
       id: map['id'] as String,
       name: map['name'] as String,
+      email: map['email'] as String,
+      contactNumber: map['contactNumber'] as String,
       address: map['address'] as String,
       ownerId: map['ownerId'] as String,
       createdAt: map['createdAt'] as Timestamp,

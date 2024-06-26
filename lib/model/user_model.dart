@@ -5,21 +5,23 @@ class Users {
   String name;
   String email;
   String passwordHash;
-  String role;
+  String gender;
+  String role; // client , trainer , gym_owner
   Timestamp createdAt;
   String profilePictureUrl;
-  String? trainerId;
+  String? trainerId; // leave this blank for now
   String contactNumber;
-  String address;
-  Timestamp dateOfBirth;
-  Map<String, dynamic> emergencyContact;
-  String membershipStatus;
+  String address; // leave this empty for the moment
+  String dateOfBirth;
+  Map<String, dynamic> emergencyContact; // dont need field for this
+  String membershipStatus; // dont need field for this
 
   Users({
     required this.id,
     required this.name,
     required this.email,
     required this.passwordHash,
+    required this.gender,
     required this.role,
     required this.createdAt,
     required this.profilePictureUrl,
@@ -38,6 +40,7 @@ class Users {
       'name': name,
       'email': email,
       'passwordHash': passwordHash,
+      'gender': gender,
       'role': role,
       'createdAt': createdAt,
       'profilePictureUrl': profilePictureUrl,
@@ -57,13 +60,14 @@ class Users {
       name: map['name'] as String,
       email: map['email'] as String,
       passwordHash: map['passwordHash'] as String,
+      gender: map['gender'] as String,
       role: map['role'] as String,
       createdAt: map['createdAt'] as Timestamp,
       profilePictureUrl: map['profilePictureUrl'] as String,
       trainerId: map['trainerId'] as String?,
       contactNumber: map['contactNumber'] as String,
       address: map['address'] as String,
-      dateOfBirth: map['dateOfBirth'] as Timestamp,
+      dateOfBirth: map['dateOfBirth'] as String,
       emergencyContact: map['emergencyContact'] as Map<String, dynamic>,
       membershipStatus: map['membershipStatus'] as String,
     );
@@ -82,10 +86,10 @@ class Users {
       trainerId: null,
       contactNumber: '',
       address: '',
-      dateOfBirth:
-          Timestamp.now(), // Assuming you want the current time for simplicity
+      dateOfBirth: '',
       emergencyContact: {},
       membershipStatus: '',
+      gender: '',
     );
   }
 }

@@ -1,38 +1,32 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fit_raho/components/my_text_field.dart';
 import 'package:fit_raho/model/user_model.dart';
-import 'package:fit_raho/src/auth/widgets/user_image_picker.dart';
+import 'package:fit_raho/src/auth/providers/signup_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-class TrainerSignUpScreen extends ConsumerStatefulWidget {
-  const TrainerSignUpScreen({super.key});
+import '../../../components/user_image_picker.dart';
 
-  static const routeName = '/trainer-signup';
+class SignUpScreen extends ConsumerStatefulWidget {
+  const SignUpScreen({super.key});
+
+  static const routeName = '/signup';
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _TrainerSignUpScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignUpScreenState();
 }
 
-class _TrainerSignUpScreenState extends ConsumerState<TrainerSignUpScreen> {
+class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _key = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _phoneNumberController = TextEditingController();
   final _genderController = TextEditingController();
   final _dateOfBirthController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _experienceController = TextEditingController();
-  final _dateOfJoiningController = TextEditingController();
-  final _endOfContractController = TextEditingController();
-  final _workingHoursController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
@@ -41,79 +35,55 @@ class _TrainerSignUpScreenState extends ConsumerState<TrainerSignUpScreen> {
   bool signInRequired = false;
   IconData iconPassword = CupertinoIcons.eye_fill;
   bool obscurePassword = true;
+  // String? _errorMsg;
 
   @override
   void dispose() {
     _nameController.dispose();
+    _emailController.dispose();
     _phoneNumberController.dispose();
     _genderController.dispose();
     _dateOfBirthController.dispose();
-    _emailController.dispose();
-    _experienceController.dispose();
-    _dateOfJoiningController.dispose();
-    _endOfContractController.dispose();
-    _workingHoursController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
   }
 
-  Future<void> _submit() async {
-    if (_key.currentState!.validate()) {
-      try {
-        // Create user in Firebase Authentication
-        UserCredential userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-                email: _emailController.text,
-                password: _passwordController.text);
-        String userId = userCredential.user!.uid;
-
-        // Upload profile picture to Firebase Storage
-        final storageRef = FirebaseStorage.instance
-            .ref()
-            .child('trainer_images')
-            .child('$userId.jpg');
-        await storageRef.putFile(_selectedImage!);
-        final imageUrl = await storageRef.getDownloadURL();
-
-        // Create new User object
-        Users newUser = Users(
-          id: userId,
-          name: _nameController.text,
-          email: _emailController.text,
-          passwordHash:
-              _passwordController.text, // Assuming you're hashing the password
-          role: 'trainer',
-          createdAt: Timestamp.now(),
-          profilePictureUrl: imageUrl,
-          contactNumber: _phoneNumberController.text,
-          dateOfBirth: Timestamp.fromDate(DateFormat('dd/MM/yyyy')
-              .parse(_dateOfBirthController.text)
-              .toLocal()), // Convert date string to Timestamp
-          emergencyContact: {}, // Assuming emergency contact is not required
-          membershipStatus: '',
-          address: '', // Assuming membership status is not required
-        );
-
-        // Store user data in Firestore
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(userId)
-            .set(newUser.toMap());
-
-        // Navigate to the next screen or show a success message
-        // ...
-      } catch (e) {
-        // Handle errors appropriately
-        log("Error during signup: $e");
-        // Show an error message to the user
-        // ...
-      }
+  void submit() {
+    if (_selectedImage?.path == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please select an image'),
+        ),
+      );
+      return;
     }
+    if (!_key.currentState!.validate()) {
+      return;
+    }
+    Users user = Users.empty();
+    user.name = _nameController.text;
+    user.email = _emailController.text;
+    user.profilePictureUrl = _selectedImage!.path;
+    user.contactNumber = _phoneNumberController.text;
+    user.gender = _genderController.text;
+    user.dateOfBirth = _dateOfBirthController.text;
+    user.passwordHash = _passwordController.text;
+    user.role = 'client';
+    user.address = '';
+    user.emergencyContact = {};
+    user.membershipStatus = '';
+    user.trainerId = '';
+    user.createdAt = Timestamp.fromDate(DateTime.now());
+    ref
+        .watch(signupProvider.notifier)
+        .submit(user, _passwordController.text, _selectedImage!);
   }
 
   @override
   Widget build(BuildContext context) {
+    // final String userType =
+    //     ModalRoute.of(context)!.settings.arguments as String;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         body: SingleChildScrollView(
@@ -141,14 +111,16 @@ class _TrainerSignUpScreenState extends ConsumerState<TrainerSignUpScreen> {
               ),
               Padding(
                 padding: EdgeInsets.only(
+                  // bottom: screenHeight * 0.025,
                   top: screenHeight * 0.025,
                 ),
                 child: Text(
-                  'Sign-up as Trainer',
+                  'Sign-up',
                   style: TextStyle(
                     height: screenHeight * 0.001,
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
+                    // fontFamily: 'IBMPlexMono',
                     color:
                         Theme.of(context).colorScheme.primary.withOpacity(0.75),
                   ),
@@ -157,6 +129,7 @@ class _TrainerSignUpScreenState extends ConsumerState<TrainerSignUpScreen> {
               Padding(
                 padding: const EdgeInsets.all(25),
                 child: Card(
+                  // width: double.infinity,
                   child: Form(
                     key: _key,
                     child: Padding(
@@ -182,7 +155,8 @@ class _TrainerSignUpScreenState extends ConsumerState<TrainerSignUpScreen> {
                                 return 'Name can\'t be empty';
                               } else if (RegExp(r'[0-9]').hasMatch(val)) {
                                 return 'Name can\'t contain numbers';
-                              } else if (RegExp(r'[!@#<>?":_`~;[\]\|=+)(*&^%$]')
+                              } else if (RegExp(
+                                      r'[!@#<>?":_`~;[\]\\|=+)(*&^%$]')
                                   .hasMatch(val)) {
                                 return 'Name can\'t contain special characters';
                               }
@@ -271,6 +245,7 @@ class _TrainerSignUpScreenState extends ConsumerState<TrainerSignUpScreen> {
                                     });
                                   },
                                   child: AbsorbPointer(
+                                    // nice widget disables the pointer on text field
                                     child: MyTextField(
                                       controller: _dateOfBirthController,
                                       hintText: 'Date of Birth',
@@ -309,110 +284,6 @@ class _TrainerSignUpScreenState extends ConsumerState<TrainerSignUpScreen> {
                                 }
                                 return null;
                               }),
-                          const SizedBox(
-                            height: 7,
-                          ),
-                          MyTextField(
-                            controller: _experienceController,
-                            hintText: 'Experience (years)',
-                            obscureText: false,
-                            keyboardType: TextInputType.number,
-                            prefixIcon: const Icon(Icons.work_outline),
-                            validator: (val) {
-                              if (val!.isEmpty) {
-                                return 'Experience can\'t be empty';
-                              } else if (!RegExp(r'^[0-9]+$').hasMatch(val)) {
-                                return 'Enter a valid number';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(
-                            height: 7,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime.now(),
-                              ).then((selectedDate) {
-                                if (selectedDate != null) {
-                                  final formattedDate = DateFormat('dd/MM/yyyy')
-                                      .format(selectedDate);
-                                  _dateOfJoiningController.text = formattedDate;
-                                }
-                              });
-                            },
-                            child: AbsorbPointer(
-                              child: MyTextField(
-                                controller: _dateOfJoiningController,
-                                hintText: 'Date of Joining',
-                                keyboardType: TextInputType.none,
-                                obscureText: false,
-                                prefixIcon:
-                                    const Icon(Icons.calendar_today_outlined),
-                                validator: (val) {
-                                  if (val!.isEmpty) {
-                                    return 'Date of joining can\'t be empty';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 7,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime.now(),
-                              ).then((selectedDate) {
-                                if (selectedDate != null) {
-                                  final formattedDate = DateFormat('dd/MM/yyyy')
-                                      .format(selectedDate);
-                                  _endOfContractController.text = formattedDate;
-                                }
-                              });
-                            },
-                            child: AbsorbPointer(
-                              child: MyTextField(
-                                controller: _endOfContractController,
-                                hintText: 'End of Contract',
-                                keyboardType: TextInputType.none,
-                                obscureText: false,
-                                prefixIcon:
-                                    const Icon(Icons.calendar_today_outlined),
-                                validator: (val) {
-                                  if (val!.isEmpty) {
-                                    return 'End of contract can\'t be empty';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 7,
-                          ),
-                          MyTextField(
-                            controller: _workingHoursController,
-                            hintText: 'Working Hours',
-                            obscureText: false,
-                            keyboardType: TextInputType.text,
-                            prefixIcon: const Icon(Icons.access_time_outlined),
-                            validator: (val) {
-                              if (val!.isEmpty) {
-                                return 'Working hours can\'t be empty';
-                              }
-                              return null;
-                            },
-                          ),
                           const SizedBox(
                             height: 7,
                           ),
@@ -483,7 +354,8 @@ class _TrainerSignUpScreenState extends ConsumerState<TrainerSignUpScreen> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    _submit();
+                                    // handle user signup
+                                    submit();
                                   },
                                   child: const Text(
                                     'Sign up',
