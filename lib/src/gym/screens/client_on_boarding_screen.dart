@@ -12,8 +12,14 @@ class ClientOnBoardingScreen extends StatefulWidget {
 class _ClientOnBoardingScreenState extends State<ClientOnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Onboard Client',
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: const Center(
         child: Text(
           'Client Onboarding Screen',
         ),

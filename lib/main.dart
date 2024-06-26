@@ -5,7 +5,10 @@ import 'package:fit_raho/firebase_options.dart';
 import 'package:fit_raho/loading_splash_screen.dart';
 import 'package:fit_raho/src/auth/screens/signin_screen.dart';
 import 'package:fit_raho/src/auth/screens/signup_screen.dart';
-import 'package:fit_raho/src/gym/screens/gym_dashboard.dart';
+import 'package:fit_raho/src/gym/screens/client_on_boarding_screen.dart';
+import 'package:fit_raho/src/home/screens/client_home_screen.dart';
+import 'package:fit_raho/src/home/screens/gym_home_screen.dart';
+import 'package:fit_raho/src/home/screens/trainer_home_screen.dart';
 import 'package:fit_raho/src/home/widgets/home_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -90,7 +93,11 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginScreen.routeName: (context) => const LoginScreen(),
         SignUpScreen.routeName: (context) => const SignUpScreen(),
-        HomeScreen.routeName: (context) => const HomeScreen(),
+        ClientHomeScreen.routeName: (context) => const ClientHomeScreen(),
+        TrainerHomeScreen.routeName: (context) => const TrainerHomeScreen(),
+        GymHomeScreen.routeName: (context) => const GymHomeScreen(),
+        ClientOnBoardingScreen.routeName: (context) =>
+            const ClientOnBoardingScreen(),
       },
     );
   }

@@ -14,28 +14,6 @@ final signOutProvider = StateNotifierProvider<UsersNotifier, Users>((ref) {
 class UsersNotifier extends StateNotifier<Users> {
   UsersNotifier() : super(Users.empty());
 
-  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  // Future<void> signIn(String email, String password) async {
-  //   try {
-  //     UserCredential userCredential = await FirebaseAuth.instance
-  //         .signInWithEmailAndPassword(email: email, password: password);
-  //     String userId = userCredential.user!.uid;
-  //     await fetchUserData(userId);
-  //   } catch (e) {
-  //     log("Error signing in: $e");
-  //   }
-  // }
-
-  // Future<Users?> fetchUserData(String userId) async {
-  //   try {
-  //     UserService userService = UserService();
-  //    return userService.getUser(userId);
-  //   } catch (e) {
-  //     // Handle errors appropriately
-  //     log("Error fetching user data: $e");
-  //   }
-  // }
-
   void resetUser() {
     state = Users.empty();
   }
