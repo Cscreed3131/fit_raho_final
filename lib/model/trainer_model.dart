@@ -2,7 +2,7 @@
 
 class Trainer {
   String id;
-  String userId;
+  String userName;
   String specialization;
   String profilePictureUrl;
   String gymId; // gym id assigned with trainer
@@ -14,7 +14,7 @@ class Trainer {
 
   Trainer({
     required this.id,
-    required this.userId,
+    required this.userName,
     required this.specialization,
     required this.profilePictureUrl,
     required this.gymId,
@@ -29,7 +29,7 @@ class Trainer {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'userId': userId,
+      'userName': userName,
       'specialization': specialization,
       'profileImageUrl': profilePictureUrl,
       'gymId': gymId,
@@ -45,7 +45,7 @@ class Trainer {
   factory Trainer.fromMap(Map<String, dynamic> map) {
     return Trainer(
       id: map['id'] as String,
-      userId: map['userId'] as String,
+      userName: map['userName'] as String,
       specialization: map['specialization'] as String,
       profilePictureUrl: map['profilePictureUrl'] as String,
       gymId: map['gymId'] as String,

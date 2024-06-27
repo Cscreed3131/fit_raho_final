@@ -1,4 +1,5 @@
 import 'package:fit_raho/src/gym/screens/client_on_boarding_screen.dart';
+import 'package:fit_raho/src/gym/screens/trainer_on_bording_screen.dart';
 import 'package:fit_raho/src/home/widgets/my_drawer_widget.dart';
 import 'package:fit_raho/widgets/profile_dialog_box_widget.dart';
 import 'package:flutter/material.dart';
@@ -147,7 +148,8 @@ class GymHomeScreen extends StatelessWidget {
                 height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
                 child: ListTile(
                   title: const Text(
                     'Onboard Clients',
@@ -163,6 +165,28 @@ class GymHomeScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).pushNamed(
                       ClientOnBoardingScreen.routeName,
+                    );
+                  },
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
+                child: ListTile(
+                  title: const Text(
+                    'Onboard Trainers',
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.black,
+                    ),
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.black,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      TrainerOnboardingScreen.routeName,
                     );
                   },
                 ),

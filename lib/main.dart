@@ -6,6 +6,7 @@ import 'package:fit_raho/loading_splash_screen.dart';
 import 'package:fit_raho/src/auth/screens/signin_screen.dart';
 import 'package:fit_raho/src/auth/screens/signup_screen.dart';
 import 'package:fit_raho/src/gym/screens/client_on_boarding_screen.dart';
+import 'package:fit_raho/src/gym/screens/trainer_on_bording_screen.dart';
 import 'package:fit_raho/src/home/screens/client_home_screen.dart';
 import 'package:fit_raho/src/home/screens/gym_home_screen.dart';
 import 'package:fit_raho/src/home/screens/trainer_home_screen.dart';
@@ -98,6 +99,8 @@ class MyApp extends StatelessWidget {
         GymHomeScreen.routeName: (context) => const GymHomeScreen(),
         ClientOnBoardingScreen.routeName: (context) =>
             const ClientOnBoardingScreen(),
+        TrainerOnboardingScreen.routeName: (context) =>
+            const TrainerOnboardingScreen(),
       },
     );
   }

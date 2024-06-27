@@ -52,6 +52,7 @@ class _ClientOnBoardingScreenState
   }
 
   // isolate this method else where but not here ui and logic should be seperated
+  // it will be better to use the clientService file. Look up
   void _submitClientData(Users? data) {
     try {
       // Calculate subscription start and end dates based on selected plan
