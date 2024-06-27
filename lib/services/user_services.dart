@@ -23,6 +23,18 @@ class UserService {
     }
   }
 
+  Future<Users?> getUserByContactNumber(String contactNumber) async {
+    QuerySnapshot querySnapshot = await userCollection
+        .where('contactNumber', isEqualTo: contactNumber)
+        .get();
+    if (querySnapshot.docs.isNotEmpty) {
+      return Users.fromMap(
+          querySnapshot.docs.first.data() as Map<String, dynamic>);
+    } else {
+      return null;
+    }
+  }
+
   // Update a user
   Future<void> updateUser(Users user) {
     return userCollection.doc(user.id).update(user.toMap());

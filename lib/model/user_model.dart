@@ -11,10 +11,11 @@ class Users {
   String profilePictureUrl;
   String? trainerId; // leave this blank for now
   String contactNumber;
-  String address; // leave this empty for the moment
+  String address; // optional field
   String dateOfBirth;
   Map<String, dynamic> emergencyContact; // dont need field for this
-  String membershipStatus; // dont need field for this
+  String
+      membershipStatus; // Active, Inactive, Pending, Expired, Suspended ,Cancelled
 
   Users({
     required this.id,

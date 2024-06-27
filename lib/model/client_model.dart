@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Client {
   String id; // doc id
-  String userId; // user id
+  String userName; // user id
   String gymId; // client assigned with gym id
   String subscriptionPlanId;
   Timestamp subscriptionStartDate;
@@ -15,7 +15,7 @@ class Client {
 
   Client({
     required this.id,
-    required this.userId,
+    required this.userName,
     required this.gymId,
     required this.subscriptionPlanId,
     required this.subscriptionStartDate,
@@ -24,12 +24,21 @@ class Client {
     required this.progressRecords,
     required this.attendanceRecords,
   });
-
+  Client.empty()
+      : id = '',
+        userName = '',
+        gymId = '',
+        subscriptionPlanId = '',
+        subscriptionStartDate = Timestamp.now(),
+        subscriptionEndDate = Timestamp.now(),
+        enrolledClasses = [],
+        progressRecords = [],
+        attendanceRecords = [];
   // Convert Client object to a Map
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'userId': userId,
+      'userName': userName,
       'gymId': gymId,
       'subscriptionPlanId': subscriptionPlanId,
       'subscriptionStartDate': subscriptionStartDate,
@@ -44,7 +53,7 @@ class Client {
   factory Client.fromMap(Map<String, dynamic> map) {
     return Client(
       id: map['id'] as String,
-      userId: map['userId'] as String,
+      userName: map['userName'] as String,
       gymId: map['gymId'] as String,
       subscriptionPlanId: map['subscriptionPlanId'] as String,
       subscriptionStartDate: map['subscriptionStartDate'] as Timestamp,
