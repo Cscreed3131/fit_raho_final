@@ -1,4 +1,5 @@
 import 'package:fit_raho/provider/user_data_provider.dart';
+import 'package:fit_raho/src/admin/screens/admin_home_screen.dart';
 import 'package:fit_raho/src/home/screens/client_home_screen.dart';
 import 'package:fit_raho/src/home/screens/gym_home_screen.dart';
 import 'package:fit_raho/src/home/screens/trainer_home_screen.dart';
@@ -28,6 +29,8 @@ class HomeScreen extends ConsumerWidget {
         return const ClientHomeScreen(); // Return the Client's home screen widget
       case 'trainer':
         return const TrainerHomeScreen(); // Return the Trainer's home screen widget
+      case 'admin':
+        return const AdminHomeScreen(); // Return the Admin's home screen widget
       default:
         return const Scaffold(
           body: Center(

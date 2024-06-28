@@ -68,4 +68,22 @@ class Gym {
       facilities: List<String>.from(map['facilities']),
     );
   }
+  // Create an empty Gym object with default values
+  factory Gym.empty() {
+    return Gym(
+      id: '',
+      name: '',
+      email: '',
+      contactNumber: '',
+      address: '',
+      ownerId: '',
+      createdAt: Timestamp.now(),
+      trainers: [],
+      clients: [],
+      subscriptionPlans: [],
+      classSchedule: [],
+      openingHours: {},
+      facilities: [],
+    );
+  }
 }

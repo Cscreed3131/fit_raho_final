@@ -1,3 +1,5 @@
+import 'package:fit_raho/src/gym/screens/member_list_screen.dart';
+import 'package:fit_raho/src/gym/screens/trainer_list_screen.dart';
 import 'package:fit_raho/src/home/screens/gym_home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -33,18 +35,14 @@ class MyDrawer extends StatelessWidget {
             leading: const Icon(Icons.list),
             title: const Text('Member List'),
             onTap: () {
-              // Update the state of the app
-              // ...
-              Navigator.pop(context);
+              Navigator.of(context).pushNamed(MemberListScreen.routeName);
             },
           ),
           ListTile(
             leading: const Icon(Icons.person),
             title: const Text('Trainer List'),
             onTap: () {
-              // Update the state of the app
-              // ...
-              Navigator.pop(context);
+              Navigator.of(context).pushNamed(TrainerListScreen.routeName);
             },
           ),
           ListTile(

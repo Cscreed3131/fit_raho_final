@@ -34,7 +34,7 @@ class ClientService {
   }
 
   // Get all clients
-  Stream<List<Client>> getClients() {
+  Stream<List<Client>> getClientsList() {
     return clientCollection.snapshots().map((query) {
       return query.docs.map((doc) {
         return Client.fromMap(doc.data() as Map<String, dynamic>);

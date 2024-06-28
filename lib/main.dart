@@ -3,9 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fit_raho/firebase_options.dart';
 import 'package:fit_raho/loading_splash_screen.dart';
+import 'package:fit_raho/src/admin/screens/admin_home_screen.dart';
+import 'package:fit_raho/src/admin/screens/gym_onboarding_screen.dart';
 import 'package:fit_raho/src/auth/screens/signin_screen.dart';
 import 'package:fit_raho/src/auth/screens/signup_screen.dart';
 import 'package:fit_raho/src/gym/screens/client_on_boarding_screen.dart';
+import 'package:fit_raho/src/gym/screens/member_list_screen.dart';
+import 'package:fit_raho/src/gym/screens/trainer_list_screen.dart';
 import 'package:fit_raho/src/gym/screens/trainer_on_bording_screen.dart';
 import 'package:fit_raho/src/home/screens/client_home_screen.dart';
 import 'package:fit_raho/src/home/screens/gym_home_screen.dart';
@@ -94,6 +98,7 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginScreen.routeName: (context) => const LoginScreen(),
         SignUpScreen.routeName: (context) => const SignUpScreen(),
+        AdminHomeScreen.routeName: (context) => const AdminHomeScreen(),
         ClientHomeScreen.routeName: (context) => const ClientHomeScreen(),
         TrainerHomeScreen.routeName: (context) => const TrainerHomeScreen(),
         GymHomeScreen.routeName: (context) => const GymHomeScreen(),
@@ -101,6 +106,9 @@ class MyApp extends StatelessWidget {
             const ClientOnBoardingScreen(),
         TrainerOnboardingScreen.routeName: (context) =>
             const TrainerOnboardingScreen(),
+        GymOnboardingScreen.routeName: (context) => const GymOnboardingScreen(),
+        TrainerListScreen.routeName: (context) => const TrainerListScreen(),
+        MemberListScreen.routeName: (context) => const MemberListScreen(),
       },
     );
   }

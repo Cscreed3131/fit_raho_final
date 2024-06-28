@@ -7,6 +7,7 @@ class Client {
   String userName; // user id
   String gymId; // client assigned with gym id
   String subscriptionPlanId;
+  String profilePictureUrl;
   Timestamp subscriptionStartDate;
   Timestamp subscriptionEndDate;
   List<String> enrolledClasses;
@@ -18,22 +19,23 @@ class Client {
     required this.userName,
     required this.gymId,
     required this.subscriptionPlanId,
+    required this.profilePictureUrl,
     required this.subscriptionStartDate,
     required this.subscriptionEndDate,
     required this.enrolledClasses,
     required this.progressRecords,
     required this.attendanceRecords,
   });
-  Client.empty()
-      : id = '',
-        userName = '',
-        gymId = '',
-        subscriptionPlanId = '',
-        subscriptionStartDate = Timestamp.now(),
-        subscriptionEndDate = Timestamp.now(),
-        enrolledClasses = [],
-        progressRecords = [],
-        attendanceRecords = [];
+  // Client.empty()
+  //     : id = '',
+  //       userName = '',
+  //       gymId = '',
+  //       subscriptionPlanId = '',
+  //       subscriptionStartDate = Timestamp.now(),
+  //       subscriptionEndDate = Timestamp.now(),
+  //       enrolledClasses = [],
+  //       progressRecords = [],
+  //       attendanceRecords = [];
   // Convert Client object to a Map
   Map<String, dynamic> toMap() {
     return {
@@ -42,6 +44,7 @@ class Client {
       'gymId': gymId,
       'subscriptionPlanId': subscriptionPlanId,
       'subscriptionStartDate': subscriptionStartDate,
+      'profilePictureUrl': profilePictureUrl,
       'subscriptionEndDate': subscriptionEndDate,
       'enrolledClasses': enrolledClasses,
       'progressRecords': progressRecords,
@@ -62,6 +65,7 @@ class Client {
       progressRecords: List<Map<String, dynamic>>.from(map['progressRecords']),
       attendanceRecords:
           List<Map<String, dynamic>>.from(map['attendanceRecords']),
+      profilePictureUrl: map['profilePictureUrl'] as String,
     );
   }
 }

@@ -6,7 +6,8 @@ class Users {
   String email;
   String passwordHash;
   String gender;
-  String role; // client , trainer , gym_owner
+  String role; // client , trainer , gym_owner, admin
+  //admin can create gyms and do lot more on behalf of gyms.
   Timestamp createdAt;
   String profilePictureUrl;
   String? trainerId; // leave this blank for now

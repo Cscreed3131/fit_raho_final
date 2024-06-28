@@ -71,6 +71,7 @@ class _ClientOnBoardingScreenState
                   _selectedSubscriptionPlan!, // type of subscription plan 1 month,3 month,6 month, 12 month
               subscriptionStartDate: _subscriptionStartDate!,
               subscriptionEndDate: _subscriptionEndDate!,
+              profilePictureUrl: data.profilePictureUrl,
               enrolledClasses: [],
               progressRecords: [],
               attendanceRecords: [],

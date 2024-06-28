@@ -34,9 +34,10 @@ class TrainerService {
   }
 
   // Get all trainers
-  Stream<List<Trainer>> getTrainers() {
+  Stream<List<Trainer>> getTrainersList() {
     return trainerCollection.snapshots().map((query) {
       return query.docs.map((doc) {
+        print(doc);
         return Trainer.fromMap(doc.data() as Map<String, dynamic>);
       }).toList();
     });

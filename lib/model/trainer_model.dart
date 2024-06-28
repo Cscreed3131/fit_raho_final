@@ -9,7 +9,7 @@ class Trainer {
   List<String> clients; // list of client of the trainer
   List<String> certifications; // List of certification of the trainer
   int yearsOfExperience; // years of experience
-  Map<String, List<String>> availability; // days when the trainer is available
+  Map<String, List<dynamic>> availability; // days when the trainer is available
   List<Map<String, dynamic>> ratings; // list of client rating
 
   Trainer({
@@ -52,7 +52,7 @@ class Trainer {
       clients: List<String>.from(map['clients']),
       certifications: List<String>.from(map['certifications']),
       yearsOfExperience: map['yearsOfExperience'] as int,
-      availability: Map<String, List<String>>.from(map['availability']),
+      availability: Map<String, List<dynamic>>.from(map['availability']),
       ratings: List<Map<String, dynamic>>.from(map['ratings']),
     );
   }

@@ -44,7 +44,6 @@ class _TrainerOnboardingScreenState
   };
   final TextEditingController _certificationsController =
       TextEditingController();
-  List<Map<String, dynamic>> _ratings = [];
 
   void _searchUser() {
     // Fetch user data from firestore based on the search query
