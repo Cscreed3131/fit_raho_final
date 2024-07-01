@@ -26,16 +26,7 @@ class Client {
     required this.progressRecords,
     required this.attendanceRecords,
   });
-  // Client.empty()
-  //     : id = '',
-  //       userName = '',
-  //       gymId = '',
-  //       subscriptionPlanId = '',
-  //       subscriptionStartDate = Timestamp.now(),
-  //       subscriptionEndDate = Timestamp.now(),
-  //       enrolledClasses = [],
-  //       progressRecords = [],
-  //       attendanceRecords = [];
+
   // Convert Client object to a Map
   Map<String, dynamic> toMap() {
     return {

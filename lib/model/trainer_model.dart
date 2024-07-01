@@ -44,10 +44,10 @@ class Trainer {
   // Create Trainer object from a Map
   factory Trainer.fromMap(Map<String, dynamic> map) {
     return Trainer(
-      id: map['id'] as String,
-      userName: map['userName'] as String,
-      specialization: map['specialization'] as String,
-      profilePictureUrl: map['profilePictureUrl'] as String,
+      id: map['id'] ?? '',
+      userName: map['userName'] ?? '',
+      specialization: map['specialization'] ?? '',
+      profilePictureUrl: map['profilePictureUrl'] ?? '',
       gymId: map['gymId'] as String,
       clients: List<String>.from(map['clients']),
       certifications: List<String>.from(map['certifications']),
