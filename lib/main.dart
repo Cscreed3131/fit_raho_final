@@ -15,6 +15,7 @@ import 'package:fit_raho/src/home/screens/client_home_screen.dart';
 import 'package:fit_raho/src/home/screens/gym_home_screen.dart';
 import 'package:fit_raho/src/home/screens/trainer_home_screen.dart';
 import 'package:fit_raho/src/home/widgets/home_screen_widget.dart';
+import 'package:fit_raho/src/trainer/screens/create_workout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -109,6 +110,7 @@ class MyApp extends StatelessWidget {
         GymOnboardingScreen.routeName: (context) => const GymOnboardingScreen(),
         TrainerListScreen.routeName: (context) => const TrainerListScreen(),
         MemberListScreen.routeName: (context) => const MemberListScreen(),
+        CreateWorkoutScreen.routeName: (context) => const CreateWorkoutScreen(),
       },
     );
   }
