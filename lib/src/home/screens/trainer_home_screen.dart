@@ -1,4 +1,5 @@
 import 'package:fit_raho/src/trainer/screens/create_workout_screen.dart';
+import 'package:fit_raho/src/trainer/screens/client_list_screen.dart';
 import 'package:fit_raho/widgets/profile_dialog_box_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,9 @@ class TrainerHomeScreen extends StatelessWidget {
               ListTile(
                 title: const Text('Manage Your Clients'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushNamed(ClientListScreen.routeName);
+                },
               ),
             ],
           ),

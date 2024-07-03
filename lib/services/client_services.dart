@@ -23,6 +23,19 @@ class ClientService {
     }
   }
 
+  Future<Client?> getClientByContactNumber(String contactNumber) async {
+    QuerySnapshot querySnapshot = await clientCollection
+        .where('contactNumber', isEqualTo: contactNumber)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      return Client.fromMap(
+          querySnapshot.docs.first.data() as Map<String, dynamic>);
+    } else {
+      return null;
+    }
+  }
+
   // Update a client
   Future<void> updateClient(Client client) {
     return clientCollection.doc(client.id).update(client.toMap());

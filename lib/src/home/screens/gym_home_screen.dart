@@ -1,3 +1,4 @@
+import 'package:fit_raho/src/gym/screens/assign_trainer_to_client_screen.dart';
 import 'package:fit_raho/src/gym/screens/client_on_boarding_screen.dart';
 import 'package:fit_raho/src/gym/screens/trainer_on_bording_screen.dart';
 import 'package:fit_raho/src/home/widgets/my_drawer_widget.dart';
@@ -188,6 +189,27 @@ class GymHomeScreen extends StatelessWidget {
                     Navigator.of(context).pushNamed(
                       TrainerOnboardingScreen.routeName,
                     );
+                  },
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
+                child: ListTile(
+                  title: const Text(
+                    'Assign Trainer to Client',
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.black,
+                    ),
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.black,
+                  ),
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamed(AssignTrainerToClientScreen.routeName);
                   },
                 ),
               ),

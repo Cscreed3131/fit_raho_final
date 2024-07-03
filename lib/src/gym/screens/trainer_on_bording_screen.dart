@@ -80,6 +80,7 @@ class _TrainerOnboardingScreenState
         profilePictureUrl: data.profilePictureUrl,
         gymId: '', // add later through data base
         // but this id should be fetched from the gym manager id.
+        contactNumber: data.contactNumber,
         clients: [],
         certifications: _certificationsController.text.split(','),
         yearsOfExperience: int.tryParse(_yearsOfExperienceController.text) ?? 0,

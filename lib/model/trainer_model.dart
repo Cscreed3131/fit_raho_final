@@ -5,6 +5,7 @@ class Trainer {
   String userName;
   String specialization;
   String profilePictureUrl;
+  String contactNumber;
   String gymId; // gym id assigned with trainer
   List<String> clients; // list of client of the trainer
   List<String> certifications; // List of certification of the trainer
@@ -17,6 +18,7 @@ class Trainer {
     required this.userName,
     required this.specialization,
     required this.profilePictureUrl,
+    required this.contactNumber,
     required this.gymId,
     required this.clients,
     required this.certifications,
@@ -32,6 +34,7 @@ class Trainer {
       'userName': userName,
       'specialization': specialization,
       'profileImageUrl': profilePictureUrl,
+      'contactNumber': contactNumber,
       'gymId': gymId,
       'clients': clients,
       'certifications': certifications,
@@ -48,7 +51,8 @@ class Trainer {
       userName: map['userName'] ?? '',
       specialization: map['specialization'] ?? '',
       profilePictureUrl: map['profilePictureUrl'] ?? '',
-      gymId: map['gymId'] as String,
+      contactNumber: map['contactNumber'] ?? '',
+      gymId: map['gymId'] ?? '',
       clients: List<String>.from(map['clients']),
       certifications: List<String>.from(map['certifications']),
       yearsOfExperience: map['yearsOfExperience'] as int,

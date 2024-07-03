@@ -23,6 +23,20 @@ class TrainerService {
     }
   }
 
+  // **Get a trainer by contact number**
+  Future<Trainer?> getTrainerByContactNumber(String contactNumber) async {
+    QuerySnapshot querySnapshot = await trainerCollection
+        .where('contactNumber', isEqualTo: contactNumber)
+        .get();
+    print(querySnapshot);
+    if (querySnapshot.docs.isNotEmpty) {
+      return Trainer.fromMap(
+          querySnapshot.docs.first.data() as Map<String, dynamic>);
+    } else {
+      return null;
+    }
+  }
+
   // Update a trainer
   Future<void> updateTrainer(Trainer trainer) {
     return trainerCollection.doc(trainer.id).update(trainer.toMap());

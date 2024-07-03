@@ -7,6 +7,7 @@ import 'package:fit_raho/src/admin/screens/admin_home_screen.dart';
 import 'package:fit_raho/src/admin/screens/gym_onboarding_screen.dart';
 import 'package:fit_raho/src/auth/screens/signin_screen.dart';
 import 'package:fit_raho/src/auth/screens/signup_screen.dart';
+import 'package:fit_raho/src/gym/screens/assign_trainer_to_client_screen.dart';
 import 'package:fit_raho/src/gym/screens/client_on_boarding_screen.dart';
 import 'package:fit_raho/src/gym/screens/member_list_screen.dart';
 import 'package:fit_raho/src/gym/screens/trainer_list_screen.dart';
@@ -16,6 +17,7 @@ import 'package:fit_raho/src/home/screens/gym_home_screen.dart';
 import 'package:fit_raho/src/home/screens/trainer_home_screen.dart';
 import 'package:fit_raho/src/home/widgets/home_screen_widget.dart';
 import 'package:fit_raho/src/trainer/screens/create_workout_screen.dart';
+import 'package:fit_raho/src/trainer/screens/client_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -111,6 +113,9 @@ class MyApp extends StatelessWidget {
         TrainerListScreen.routeName: (context) => const TrainerListScreen(),
         MemberListScreen.routeName: (context) => const MemberListScreen(),
         CreateWorkoutScreen.routeName: (context) => const CreateWorkoutScreen(),
+        AssignTrainerToClientScreen.routeName: (context) =>
+            const AssignTrainerToClientScreen(),
+        ClientListScreen.routeName: (context) => const ClientListScreen(),
       },
     );
   }

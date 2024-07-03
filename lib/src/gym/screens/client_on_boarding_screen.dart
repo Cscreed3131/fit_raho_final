@@ -69,6 +69,8 @@ class _ClientOnBoardingScreenState
               gymId: '', // assigned with gym Id
               subscriptionPlanId:
                   _selectedSubscriptionPlan!, // type of subscription plan 1 month,3 month,6 month, 12 month
+              assignedTrainerId: '',
+              contactNumber: data.contactNumber,
               subscriptionStartDate: _subscriptionStartDate!,
               subscriptionEndDate: _subscriptionEndDate!,
               profilePictureUrl: data.profilePictureUrl,

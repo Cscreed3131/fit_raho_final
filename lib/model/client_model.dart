@@ -8,6 +8,8 @@ class Client {
   String gymId; // client assigned with gym id
   String subscriptionPlanId;
   String profilePictureUrl;
+  String? assignedTrainerId;
+  String contactNumber;
   Timestamp subscriptionStartDate;
   Timestamp subscriptionEndDate;
   List<String> enrolledClasses;
@@ -20,6 +22,8 @@ class Client {
     required this.gymId,
     required this.subscriptionPlanId,
     required this.profilePictureUrl,
+    this.assignedTrainerId,
+    required this.contactNumber,
     required this.subscriptionStartDate,
     required this.subscriptionEndDate,
     required this.enrolledClasses,
@@ -34,6 +38,8 @@ class Client {
       'userName': userName,
       'gymId': gymId,
       'subscriptionPlanId': subscriptionPlanId,
+      'contactNumber': contactNumber,
+      'assignedTrainerId': assignedTrainerId,
       'subscriptionStartDate': subscriptionStartDate,
       'profilePictureUrl': profilePictureUrl,
       'subscriptionEndDate': subscriptionEndDate,
@@ -46,17 +52,19 @@ class Client {
   // Create Client object from a Map
   factory Client.fromMap(Map<String, dynamic> map) {
     return Client(
-      id: map['id'] as String,
-      userName: map['userName'] as String,
-      gymId: map['gymId'] as String,
-      subscriptionPlanId: map['subscriptionPlanId'] as String,
+      id: map['id'] ?? '',
+      userName: map['userName'] ?? '',
+      gymId: map['gymId'] ?? '',
+      contactNumber: map['contactNumber'] ?? '',
+      subscriptionPlanId: map['subscriptionPlanId'] ?? '',
+      assignedTrainerId: map['assignedTrainerId'] ?? '',
       subscriptionStartDate: map['subscriptionStartDate'] as Timestamp,
       subscriptionEndDate: map['subscriptionEndDate'] as Timestamp,
       enrolledClasses: List<String>.from(map['enrolledClasses']),
       progressRecords: List<Map<String, dynamic>>.from(map['progressRecords']),
       attendanceRecords:
           List<Map<String, dynamic>>.from(map['attendanceRecords']),
-      profilePictureUrl: map['profilePictureUrl'] as String,
+      profilePictureUrl: map['profilePictureUrl'] ?? '',
     );
   }
 }
