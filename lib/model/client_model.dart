@@ -8,6 +8,7 @@ class Client {
   String gymId; // client assigned with gym id
   String subscriptionPlanId;
   String profilePictureUrl;
+  String? dayRoutineId;
   String? assignedTrainerId;
   String contactNumber;
   Timestamp subscriptionStartDate;
@@ -22,6 +23,7 @@ class Client {
     required this.gymId,
     required this.subscriptionPlanId,
     required this.profilePictureUrl,
+    this.dayRoutineId,
     this.assignedTrainerId,
     required this.contactNumber,
     required this.subscriptionStartDate,
@@ -37,6 +39,7 @@ class Client {
       'id': id,
       'userName': userName,
       'gymId': gymId,
+      'dayRoutineId': dayRoutineId,
       'subscriptionPlanId': subscriptionPlanId,
       'contactNumber': contactNumber,
       'assignedTrainerId': assignedTrainerId,
@@ -55,6 +58,7 @@ class Client {
       id: map['id'] ?? '',
       userName: map['userName'] ?? '',
       gymId: map['gymId'] ?? '',
+      dayRoutineId: map['dayRoutineId'] ?? '',
       contactNumber: map['contactNumber'] ?? '',
       subscriptionPlanId: map['subscriptionPlanId'] ?? '',
       assignedTrainerId: map['assignedTrainerId'] ?? '',

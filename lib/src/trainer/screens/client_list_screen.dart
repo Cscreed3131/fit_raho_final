@@ -3,6 +3,8 @@ import 'package:fit_raho/src/trainer/provider/assigned_clients_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'assign_work_out_routine_screen.dart';
+
 class ClientListScreen extends ConsumerStatefulWidget {
   const ClientListScreen({super.key});
   static const routeName = 'client-list';
@@ -39,11 +41,10 @@ class _ClientListScreenState extends ConsumerState<ClientListScreen> {
                       final client = data[index];
                       return InkWell(
                         onTap: () {
-                          // Navigate to client details screen
-                          // Navigator.of(context).pushNamed(
-                          //   ClientDetailsScreen.routeName,
-                          //   arguments: client,
-                          // );
+                          Navigator.of(context).pushNamed(
+                            AssignWorkoutRoutineScreen.routeName,
+                            arguments: client,
+                          );
                         },
                         child: Container(
                           width: double.infinity,

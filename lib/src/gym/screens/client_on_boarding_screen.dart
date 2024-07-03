@@ -70,6 +70,7 @@ class _ClientOnBoardingScreenState
               subscriptionPlanId:
                   _selectedSubscriptionPlan!, // type of subscription plan 1 month,3 month,6 month, 12 month
               assignedTrainerId: '',
+              dayRoutineId: '',
               contactNumber: data.contactNumber,
               subscriptionStartDate: _subscriptionStartDate!,
               subscriptionEndDate: _subscriptionEndDate!,
